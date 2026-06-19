@@ -32,3 +32,10 @@ label ::= :name
 cond ::= t cmp t
 names::= name | name (, name)*
 ```
+
+## Usage
+```
+mkdir build && cd build
+cmake ..
+./compiler path_to_source
+```
