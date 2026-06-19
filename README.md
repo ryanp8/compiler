@@ -1,6 +1,6 @@
 # Toy C-like Language Compiler
 
-Inspired by the code written for the assignments in [Compiler Construction](https://users.cs.northwestern.edu/~simonec/CC.html) course at Northwestern (loops, arrays, register allocation, etc).
+Work in progress project inspired by the code written for the assignments in [Compiler Construction](https://users.cs.northwestern.edu/~simonec/CC.html) course at Northwestern (loops, arrays, register allocation, etc).
 The assignments involved creating a series of compilers that perform semantics-preserving transformations but used many intermediate languages (LB -> LA -> IR -> L3 -> L2 -> L1 -> x86). The goal for this project is
 to improve on the code written for class and go from LB -> IR -> x86 without emitting as many intermediate languages.
 
