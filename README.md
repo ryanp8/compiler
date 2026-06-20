@@ -1,8 +1,8 @@
 # Toy C-like Language Compiler
 
-Inspired by the code written for the assignments in [Compiler Construction](https://users.cs.northwestern.edu/~simonec/CC.html) course at Northwestern (loops, arrays, register allocation, etc).
-The assignments involved creating a series of compilers that perform semantics-preserving transformations but used many intermediate languages (LB -> LA -> IR -> L3 -> L2 -> L1 -> x86). The goal for this project is
-to improve on the code written for class and go from LB -> IR -> x86 without emitting as many intermediate languages.
+Work in progress project inspired by the code submitted for the assignments in [Compiler Construction](https://users.cs.northwestern.edu/~simonec/CC.html) course at Northwestern.
+The assignments involved creating a series of compilers that perform semantics-preserving transformations (implementing loops, code linearization, instruction selection, register allocation, etc) but used many intermediate languages (LB -> LA -> IR -> L3 -> L2 -> L1 -> x86). The goal for this project is
+to improve on the code written for class and go from LB -> IR -> x86 without emitting as many intermediate languages, following a structure more similar to what is used in production.
 
 ## Stages
 1. Parsing: Use PEGTL to convert the program into AST and determines the type of each variable. Converts AST into block-based IR
