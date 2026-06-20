@@ -12,7 +12,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(lib/PEGTL)
  
-add_executable(${PROJECT_NAME} src/main.cpp src/parser/parser.cpp src/parser/ast.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/parser/parser.cpp src/parser/ast.cpp src/utils/identifier_generator.cpp)
  
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 target_link_libraries(${PROJECT_NAME} PRIVATE taocpp::pegtl)
