@@ -5,8 +5,8 @@ The assignments involved creating a series of compilers that perform semantics-p
 to improve on the code written for class and go from LB -> IR -> x86 without emitting as many intermediate languages, following a structure more similar to what is used in production.
 
 ## Stages
-1. Parsing: Use PEGTL to convert the program into AST and determines the type of each variable. Converts AST into block-based IR
-2. IR: Perform instruction selection, register allocation to generate x86. Potentially convert into SSA form for optimizations.
+1. Parsing: Use PEGTL to convert the program into AST and determines the type of each variable. The AST is converted into block-based IR
+2. IR: Convert into SSA form for optimizations. Perform instruction selection and graph-coloring register allocation to generate x86
 3. x86_64 assembly
 
 ## Language Grammar
