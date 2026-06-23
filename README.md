@@ -10,7 +10,7 @@ to improve on the code written for class and go from LB -> IR -> x86 without emi
 3. x86_64 assembly
 
 ## Language Grammar
-Inspired from CS322's LB language
+Inspired by CS322's LB language
 ```
 p ::= f+
 f ::= T name ( pars ) scope
