@@ -20,7 +20,10 @@ add_executable(${PROJECT_NAME}
   src/ast/ast.cpp
   src/ast/symbol_table.cpp
   src/ir/ir.cpp
-  src/utils/identifier_generator.cpp)
+  src/ir/basic_block.cpp
+  src/utils/identifier_generator.cpp
+  src/common/ops.cpp
+  )
  
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
 target_link_libraries(${PROJECT_NAME} PRIVATE taocpp::pegtl)

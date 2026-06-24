@@ -1,11 +1,12 @@
 #pragma once
 
+#include "common/ops.h"
 #include "context.h"
 #include <string>
 #include <vector>
 
 namespace utils {
-  class IdentifierGenerator;
+class IdentifierGenerator;
 }
 
 namespace ast {
@@ -44,7 +45,6 @@ private:
   long long _val;
 };
 
-enum EOp { ADD, SUB, MUL, AND, L_SHIFT, R_SHIFT, LT, LTEQ, EQ, GTEQ, GT };
 class Op : public ASTNode {
 public:
   Op(EOp op);

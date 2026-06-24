@@ -1,100 +1,173 @@
 #pragma once
 
+#include "common/ops.h"
+#include <memory>
 #include <string>
-#include <variant>
 #include <vector>
 
 namespace ir {
 
-class Variable {
+class IRBase {
+public:
+  virtual std::string to_string() const = 0;
+  virtual ~IRBase() {};
+};
+
+class IRIdentifier : public IRBase {
+public:
+  IRIdentifier(std::string name);
+  std::string to_string() const override { return _name; }
+
+protected:
+  std::string _name;
+};
+
+class Variable : public IRIdentifier {
 public:
   Variable(std::string name);
-private:
-  std::string _name;
 };
 
-class Label {
+class Label : public IRIdentifier {
 public:
   Label(std::string name);
-private:
-  std::string _name;
 };
 
-class Number {
+class FunctionName : public IRIdentifier {
+public:
+  FunctionName(std::string name);
+};
+
+class Number : public IRBase {
 public:
   Number(long long val);
+  std::string to_string() const override;
+
 private:
   long long _val;
 };
 
-class FunctionName {
+class Op : public IRBase {
 public:
-  FunctionName(std::string name);
-private:
-  std::string _name;
-};
+  Op(EOp op);
+  std::string to_string() const override;
 
-using Operand = std::variant<Variable, Label, Number, FunctionName>;
+private:
+  EOp _op;
+};
 
 namespace instr {
 
-class Label;
-class Assign;
-class AssignOp;
-class Call;
-class AssignCall;
-class ArrGet;
-class ArrSet;
-class Length;
-class Branch;
-class Return;
+// class Label;
+// class Assign;
+// class AssignOp;
+// class Call;
+// class AssignCall;
+// class ArrGet;
+// class ArrSet;
+// class Length;
+// class Branch;
+// class Return;
 
-using Instr = std::variant<Label, Assign, AssignOp, Call, AssignCall, ArrGet, ArrSet, Length, Branch, Return>;
+// using Instr = std::variant<Label, Assign, AssignOp, Call, AssignCall, ArrGet,
+//                            ArrSet, Length, Branch, Return>;
 
-class InstrBase {
+class Instr : public IRBase {
+public:
+  Instr(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
 protected:
-  std::vector<std::unique_ptr<Operand>> _ops;
+  std::vector<std::unique_ptr<IRBase>> _ops;
   Instr *successor;
 };
 
-class Label : public InstrBase {};
+class Label : public Instr {
+public:
+  Label(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class Assign : public InstrBase {};
+class Assign : public Instr {
+public:
+  Assign(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class AssignOp : public InstrBase {};
+class AssignOp : public Instr {
+public:
+  AssignOp(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class Call : public InstrBase {};
+class Call : public Instr {
+public:
+  Call(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class AssignCall : public InstrBase {};
+class AssignCall : public Instr {
+public:
+  AssignCall(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class ArrGet : public InstrBase {};
+class ArrGet : public Instr {
+public:
+  ArrGet(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class ArrSet : public InstrBase {};
+class ArrSet : public Instr {
+public:
+  ArrSet(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class Length : public InstrBase {};
+class Length : public Instr {
+public:
+  Length(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class Branch : public InstrBase {};
+class Branch : public Instr {
+public:
+  Branch(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
-class Return : public InstrBase {};
+class Return : public Instr {
+public:
+  Return(std::vector<std::unique_ptr<IRBase>> ops);
+  std::string to_string() const override;
+};
 
 } // namespace instr
 
-class BasicBlock {
+class BasicBlock : public IRBase {
 public:
+  std::string to_string() const override;
+
   void add_instr(std::unique_ptr<instr::Instr> instr);
 
 private:
   std::vector<std::unique_ptr<instr::Instr>> _instrs;
 };
 
-class Function {
+class Function : public IRBase {
 public:
+  Function(std::unique_ptr<FunctionName> name);
+  std::string to_string() const override;
+
+  void add_block(std::unique_ptr<BasicBlock> block);
 private:
+  std::unique_ptr<FunctionName> _name;
   std::vector<std::unique_ptr<BasicBlock>> _blocks;
 };
 
-class Program {
+class Program : public IRBase {
 public:
+  std::string to_string() const override;
+
+  void add_func(std::unique_ptr<Function> func);
 private:
   std::vector<std::unique_ptr<Function>> _funcs;
 };
