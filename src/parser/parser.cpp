@@ -13,7 +13,7 @@
 #include <tao/pegtl/contrib/raw_string.hpp>
 
 #include "parser.h"
-#include "ast.h"
+#include "ast/ast.h"
 #include "tao/pegtl/ascii.hpp"
 #include "tao/pegtl/internal/pegtl_string.hpp"
 
@@ -22,7 +22,7 @@ namespace pegtl = TAO_PEGTL_NAMESPACE;
 
 using namespace pegtl;
 
-namespace parser {
+namespace ast {
 
   struct str_arrow : TAO_PEGTL_STRING( "<-" ) {};
   struct str_goto : TAO_PEGTL_STRING( "goto" ) {};
@@ -656,8 +656,6 @@ namespace parser {
   template<> struct action < scope_entry_rule > {
     template<typename Input>
     static void apply( const Input & in, Program & p){
-      std::cout << "scope entry\n";
-      print_parsed_items();
       parsed_items.push_back(std::make_unique<Scope>());
     }
   }; 
@@ -884,10 +882,6 @@ namespace parser {
   template<> struct action < function_rule > {
     template<typename Input>
     static void apply( const Input & in, Program & p){
-
-      std::cout << "function\n";
-      std::cout << parsed_items.size() << "\n";
-      print_parsed_items();
       auto body = pop();
       auto pars = pop();
       auto name = pop();

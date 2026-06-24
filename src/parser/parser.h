@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ast.h"
+#include "ast/ast.h"
 
-namespace parser {
-  Program parse_file(const char *filename);
+namespace ast {
+  ast::Program parse_file(const char *filename);
 }

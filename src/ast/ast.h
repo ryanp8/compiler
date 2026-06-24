@@ -1,9 +1,14 @@
 #pragma once
 
+#include "context.h"
 #include <string>
 #include <vector>
 
-namespace parser {
+namespace utils {
+  class IdentifierGenerator;
+}
+
+namespace ast {
 
 class ASTNode {
 public:
@@ -13,6 +18,7 @@ public:
   std::string children_to_string() const;
   virtual std::string to_string() const = 0;
   virtual ~ASTNode() {}
+  virtual void gen_ir(Context &c) {}
 
   void add_child(std::unique_ptr<ASTNode> child);
 
@@ -207,4 +213,6 @@ public:
   std::string to_string() const override;
 };
 
-} // namespace parser
+void gen_ir();
+
+} // namespace ast

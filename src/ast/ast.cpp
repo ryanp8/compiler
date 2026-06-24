@@ -4,8 +4,9 @@
 #include <string>
 
 #include "ast.h"
+#include "utils/identifier_generator.h"
 
-namespace parser {
+namespace ast {
 
 ASTNode::ASTNode(std::vector<std::unique_ptr<ASTNode>> children)
     : _children(std::move(children)) {}
@@ -210,4 +211,4 @@ std::string Program::to_string() const {
   return "{ Program: " + ASTNode::children_to_string() + " }";
 }
 
-} // namespace parser
+} // namespace ast

@@ -1,6 +1,7 @@
 #include <iostream>
+#include <memory>
 
-#include "parser/ast.h"
+#include "ast/ast.h"
 #include "parser/parser.h"
 
 
@@ -16,7 +17,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  parser::Program p = parser::parse_file(argv[1]);
+  ast::Program p = ast::parse_file(argv[1]);
   std::cout << p.to_string() << "\n";
 
   return 0;

@@ -32,6 +32,7 @@ private:
 
 class IdentifierGenerator {
 public:
+  IdentifierGenerator() = default;
   IdentifierGenerator(const std::string &);
   IdentifierGenerator(const std::string &, std::vector<std::string> &);
   void insert(const std::string &);
