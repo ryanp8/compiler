@@ -2,12 +2,13 @@
 
 Work in progress project inspired by the code submitted for the assignments in [Compiler Construction](https://users.cs.northwestern.edu/~simonec/CC.html) course at Northwestern.
 The assignments involved creating a series of compilers that perform semantics-preserving transformations (implementing loops, code linearization, instruction selection, register allocation, etc) but used many intermediate languages (LB -> LA -> IR -> L3 -> L2 -> L1 -> x86). The goal for this project is
-to improve on the code written for class and go from LB -> IR -> x86 without emitting as many intermediate languages, following a structure more similar to what is used in production.
+to improve on the code written for class and go from LB -> IR -> Backend -> x86 without emitting as many intermediate languages, following a structure more similar to what is used in production.
 
 ## Stages
 1. Parsing: Use PEGTL to convert the program into AST and determines the type of each variable. The AST is converted into block-based IR
-2. IR: Convert into SSA form for optimizations. Perform instruction selection and graph-coloring register allocation to generate x86
-3. x86_64 assembly
+2. IR: Convert into SSA form for optimizations. Perform instruction selection to translate to backend language that is similar to x86 but with variables.
+3. Backend: Perform graph-coloring-based register allocation and emit x86.
+4. x86_64 assembly
 
 ## Language Grammar
 Inspired by CS322's LB language
